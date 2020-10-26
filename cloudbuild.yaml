@@ -1,0 +1,12 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build',
+      '--build-arg',
+      'SECRET_KEY_ARG=${_SECRET_KEY}',
+      '--build-arg',
+      'ALLOWED_HOSTS_ARG=${_ALLOWED_HOSTS}',
+      '-t',
+      'gcr.io/totemic-sector-293316/login-page-api',
+      '.']
+images:
+  - 'gcr.io/totemic-sector-293316/login-page-api'

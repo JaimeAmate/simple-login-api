@@ -1,24 +1,17 @@
 version: '3.8'
 
 services:
-  db:
-    image: postgres:12.0-alpine
-    ports: 
-      - "5432:5432"
-    environment: 
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
   api:
     container_name: backend
+    restart: always
     build:
       context: .
-      dockerfile: Dockerfile
-    env_file: 
-      - ./.env
+      dockerfile: Dockerfile.dev
+    environment:
+      - SECRET_KEY=${DJANGO_SECRET_KEY}
+      - ALLOWED_HOSTS=.localhost
+      - ENVIRONTMENT=development
     volumes:
       - .:/app
     ports:
       - "8000:8000"
-    depends_on: 
-      - db
